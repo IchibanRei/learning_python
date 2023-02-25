@@ -1,9 +1,6 @@
-from multiprocessing import RLock
-from multiprocessing.connection import wait
+import random
 from os import system, name
 from time import sleep
-import random
-import re
 
 
 def clear():
@@ -17,7 +14,7 @@ def clear():
 
 
 def shoot():
-    waitTime = 0.5
+    wait_time = 0.5
     chants = ("ROCK! ", "PAPER! ", "SCISSORS! ", "SHOOT!")
     chant = ""
 
@@ -26,10 +23,10 @@ def shoot():
         clear()
         chant += c
         print(chant)
-        sleep(waitTime)
+        sleep(wait_time)
 
 
-def pickWinner(pc, cc):
+def pick_winner(pc, cc):
     if (pc + 1) % 3 == cc:
         return "You Lose!"
     elif pc == cc:
@@ -41,28 +38,28 @@ def pickWinner(pc, cc):
 # allowed choices
 choices = {0: "rock", 1: "paper", 2: "scissors"}
 print("Welcome to Rock Paper Scissors.")
-playAgain = "y"
+play_again = "y"
 
-while playAgain == "y":
+while play_again == "y":
 
-    playerChoice = int(
+    player_choice = int(
         input("Make a choice; 0 for rock, 1 for paper or 2 for scissors\n"))
 
-    computerChoice = random.choice(list(choices))
+    computer_choice = random.choice(list(choices))
 
-    if playerChoice not in choices.keys():
+    if player_choice not in choices.keys():
         print("{} is an invalid choice.  Please enter 0 for rock,  1 for paper or 2 for scissors".format(
-            playerChoice))
+            player_choice))
     else:
         shoot()
 
-        print("You picked: {}".format(choices[playerChoice]))
-        print("I picked: {}".format(choices[computerChoice]))
+        print("You picked: {}".format(choices[player_choice]))
+        print("I picked: {}".format(choices[computer_choice]))
 
-        print(pickWinner(playerChoice, computerChoice))
+        print(pick_winner(player_choice, computer_choice))
 
-        playAgain = input("Play again? y for yes / n for no\n")
+        play_again = input("Play again? y for yes / n for no\n")
         clear()
-        if playAgain != "y":
-            playAgain = "n"
+        if play_again != "y":
+            play_again = "n"
             print("Thanks for Playing")
